@@ -17,4 +17,16 @@ class PostsState {
     this.posts = const [],
     this.exception,
   });
+
+  PostsState copyWith({
+    PostsStatus? status,
+    List<Post>? posts,
+    AppException? exception,
+  }) {
+    return PostsState(
+      status: status ?? this.status,
+      posts: posts ?? this.posts,
+      exception: exception ?? this.exception,
+    );
+  }
 }

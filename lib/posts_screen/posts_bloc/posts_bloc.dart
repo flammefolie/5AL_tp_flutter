@@ -1,38 +1,33 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:tp_flutter_posts/shared/services/posts_repository.dart';
 
 import '../../app_exception.dart';
 import '../../models/post.dart';
 
 part 'posts_event.dart';
+
 part 'posts_state.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
-  PostsBloc() : super(const PostsState()) {
+  final PostsRepository postsRepository;
+
+  PostsBloc({required this.postsRepository}) : super(const PostsState()) {
     on<GetAllPosts>((event, emit) async {
       try {
-        emit(const PostsState(status: PostsStatus.loading));
-        final posts = await _getPosts();
-        emit(PostsState(
+        emit(state.copyWith(status: PostsStatus.loading));
+        final posts = await postsRepository.getAllPosts();
+        emit(state.copyWith(
           posts: posts,
           status: PostsStatus.success,
         ));
       } catch (error) {
         final appException = AppException.from(error);
-        emit(PostsState(
+        emit(state.copyWith(
           status: PostsStatus.error,
           exception: appException,
         ));
       }
     });
-  }
-
-  List<Post> _getPosts() {
-    List<Post> fakePosts = [
-      Post(id: 1, title: 'Post 1', description: 'Description of post1'),
-      Post(id: 2, title: 'Post 2', description: 'Description of post2'),
-      Post(id: 3, title: 'Post 3', description: 'Description of post3'),
-    ];
-    return fakePosts;
   }
 }

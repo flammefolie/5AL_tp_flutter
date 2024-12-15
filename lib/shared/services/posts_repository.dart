@@ -12,7 +12,8 @@ class PostsRepository {
     try {
       return await localDataSource.getAllPosts();
     } catch (error) {
-      rethrow;
+      rethrow; //permet à l'appelant de savoir qu'il y a une erreur côté récupération des posts, et donc de différencier l'erreur du résultat vide.
+      //si jamais on utilisait une source externe, une logique supplémentaire devrait être ajoutée.
     }
   }
 }

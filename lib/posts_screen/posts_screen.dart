@@ -30,6 +30,7 @@ class _PostsScreenState extends State<PostsScreen> {
             return switch (state.status) {
               PostsStatus.loading || PostsStatus.initial => _buildLoading(context),
               PostsStatus.error => _buildError(context, state.exception),
+              PostsStatus.empty => _buildEmpty(context),
               PostsStatus.success => _buildSuccess(context, state.posts),
             };
           },
@@ -45,7 +46,13 @@ class _PostsScreenState extends State<PostsScreen> {
 
   Widget _buildError(BuildContext context, AppException? exception) {
     return Center(
-      child: Text('Error: $exception'),
+      child: Text('Error building posts page: $exception'),
+    );
+  }
+
+  Widget _buildEmpty(BuildContext context) {
+    return const Center(
+      child: Text('No posts available ! Try to create some posts :)'),
     );
   }
 

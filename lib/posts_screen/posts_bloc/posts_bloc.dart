@@ -17,10 +17,16 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       try {
         emit(state.copyWith(status: PostsStatus.loading));
         final posts = await postsRepository.getAllPosts();
-        emit(state.copyWith(
-          posts: posts,
-          status: PostsStatus.success,
-        ));
+        if (posts.isEmpty) {
+          emit(state.copyWith(
+            status: PostsStatus.empty,
+          ));
+        } else {
+          emit(state.copyWith(
+            posts: posts,
+            status: PostsStatus.success,
+          ));
+        }
       } catch (error) {
         final appException = AppException.from(error);
         emit(state.copyWith(

@@ -1,5 +1,4 @@
-import 'package:tp_flutter_posts/models/post.dart';
-
+import '../../models/post.dart';
 import 'local_posts_data_source.dart';
 
 class FakeLocalPostsDataSource extends LocalPostsDataSource {
@@ -11,6 +10,7 @@ class FakeLocalPostsDataSource extends LocalPostsDataSource {
 
   @override
   Future<List<Post>> getAllPosts() async {
+    await Future.delayed(const Duration(seconds: 1));
     return _fakePosts;
   }
 

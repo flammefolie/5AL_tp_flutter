@@ -1,4 +1,4 @@
-import '../../../models/post.dart';
+import '../../models/post.dart';
 
 abstract class LocalPostsDataSource {
   Future<List<Post>> getAllPosts();

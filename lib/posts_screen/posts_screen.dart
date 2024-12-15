@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tp_flutter_posts/posts_screen/posts_bloc/posts_bloc.dart';
 
 import '../app_exception.dart';
-import '../models/post.dart';
+import '../shared/models/post.dart';
 
 class PostsScreen extends StatefulWidget {
   const PostsScreen({super.key});
@@ -26,14 +26,15 @@ class _PostsScreenState extends State<PostsScreen> {
         title: const Text('Posts'),
       ),
       body: BlocBuilder<PostsBloc, PostsState>(
-          builder: (context, state) {
-            return switch (state.status) {
-              PostsStatus.loading || PostsStatus.initial => _buildLoading(context),
-              PostsStatus.error => _buildError(context, state.exception),
-              PostsStatus.empty => _buildEmpty(context),
-              PostsStatus.success => _buildSuccess(context, state.posts),
-            };
-          },
+        builder: (context, state) {
+          return switch (state.status) {
+            PostsStatus.loading ||
+            PostsStatus.initial => _buildLoading(context),
+            PostsStatus.error => _buildError(context, state.exception),
+            PostsStatus.empty => _buildEmpty(context),
+            PostsStatus.success => _buildSuccess(context, state.posts),
+          };
+        },
       ),
     );
   }

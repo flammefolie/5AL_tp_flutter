@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:tp_flutter_posts/shared/services/posts_repository.dart';
 
 import '../../app_exception.dart';
-import '../../models/post.dart';
+import '../../shared/models/post.dart';
 
 part 'posts_event.dart';
 

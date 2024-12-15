@@ -65,7 +65,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       final postsBloc = BlocProvider.of<PostsBloc>(context);
       postsBloc.add(CreatePost(post: newPost));
 
-      Navigator.pop(context);
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please fill out all fields!')),

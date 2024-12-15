@@ -67,8 +67,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
       );
 
       context.read<PostsBloc>().add(UpdatePost(post: updatedPost));
-      Navigator.pop(context);
-      Navigator.pop(context);
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please fill out all fields !')),

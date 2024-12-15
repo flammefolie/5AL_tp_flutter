@@ -3,5 +3,7 @@ import '../../models/post.dart';
 abstract class LocalPostsDataSource {
   Future<List<Post>> getAllPosts();
 
-  Future<void> save(List<Post> posts);
+  Future<void> addPost(Post post);
+
+  Future<void> updatePost(Post updatedPost);
 }

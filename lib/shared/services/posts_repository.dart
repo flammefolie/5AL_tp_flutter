@@ -18,18 +18,11 @@ class PostsRepository {
   }
 
   Future<Post> addPost(Post post) async {
-    final existingPosts = await localDataSource.getAllPosts();
-    final updatedPosts = [...existingPosts, post];
-    await localDataSource.save(updatedPosts);
+    await localDataSource.addPost(post);
     return post;
   }
 
   Future<void> updatePost(Post updatedPost) async {
-    final existingPosts = await localDataSource.getAllPosts();
-    final updatedPosts = existingPosts.map((post) {
-      return post.id == updatedPost.id ? updatedPost : post;
-    }).toList();
-
-    await localDataSource.save(updatedPosts);
+    await localDataSource.updatePost(updatedPost);
   }
 }

@@ -6,3 +6,5 @@ class AppException implements Exception {
 }
 
 class UnknownException extends AppException {}
+
+class PostNotFoundException extends AppException {}

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tp_flutter_posts/posts_screen/post_detail_screen/post_detail_screen.dart';
 import 'package:tp_flutter_posts/posts_screen/posts_bloc/posts_bloc.dart';
 import 'package:tp_flutter_posts/posts_screen/posts_screen.dart';
+import 'package:tp_flutter_posts/shared/models/post.dart';
 import 'package:tp_flutter_posts/shared/services/local_posts_data_source/fake_local_posts_data_source.dart';
 import 'package:tp_flutter_posts/shared/services/posts_repository.dart';
 
@@ -22,8 +24,24 @@ class MyApp extends StatelessWidget {
         create: (context) => PostsBloc(
           postsRepository: context.read<PostsRepository>(),
         ),
-        child: const MaterialApp(
-          home: PostsScreen(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          routes: {
+            '/': (context) => const PostsScreen(),
+          },
+          onGenerateRoute: (routeSettings) {
+            Widget screen = Container(color: Colors.pink);
+            final argument = routeSettings.arguments;
+            switch (routeSettings.name) {
+              case 'postDetail':
+                if (argument is Post) {
+                  screen = PostDetailScreen(post: argument);
+                }
+                break;
+            }
+
+            return MaterialPageRoute(builder: (context) => screen);
+          },
         ),
       ),
     );

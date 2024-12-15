@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tp_flutter_posts/posts_screen/post_detail_screen/post_detail_screen.dart';
 import 'package:tp_flutter_posts/posts_screen/posts_bloc/posts_bloc.dart';
 
 import '../app_exception.dart';
@@ -29,7 +30,8 @@ class _PostsScreenState extends State<PostsScreen> {
         builder: (context, state) {
           return switch (state.status) {
             PostsStatus.loading ||
-            PostsStatus.initial => _buildLoading(context),
+            PostsStatus.initial =>
+              _buildLoading(context),
             PostsStatus.error => _buildError(context, state.exception),
             PostsStatus.empty => _buildEmpty(context),
             PostsStatus.success => _buildSuccess(context, state.posts),
@@ -70,6 +72,7 @@ class _PostsScreenState extends State<PostsScreen> {
           return ListTile(
             title: Text(post.title),
             subtitle: Text(post.description),
+            onTap: () => _onPostTap(context, post),
           );
         },
       ),
@@ -79,5 +82,9 @@ class _PostsScreenState extends State<PostsScreen> {
   void _getAllPosts() {
     final postsBloc = BlocProvider.of<PostsBloc>(context);
     postsBloc.add(GetAllPosts());
+  }
+
+  void _onPostTap(BuildContext context, Post post) {
+    PostDetailScreen.navigateTo(context, post);
   }
 }

@@ -16,4 +16,11 @@ class PostsRepository {
       //si jamais on utilisait une source externe, une logique supplémentaire devrait être ajoutée.
     }
   }
+
+  Future<Post> addPost(Post post) async {
+    final existingPosts = await localDataSource.getAllPosts();
+    final updatedPosts = [...existingPosts, post];
+    await localDataSource.save(updatedPosts);
+    return post;
+  }
 }

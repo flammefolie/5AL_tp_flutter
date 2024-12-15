@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tp_flutter_posts/posts_screen/create_post_screen/create_post_screen.dart';
 import 'package:tp_flutter_posts/posts_screen/post_detail_screen/post_detail_screen.dart';
 import 'package:tp_flutter_posts/posts_screen/posts_bloc/posts_bloc.dart';
 import 'package:tp_flutter_posts/posts_screen/posts_screen.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           routes: {
             '/': (context) => const PostsScreen(),
+            'createPost': (context) => const CreatePostScreen(),
           },
           onGenerateRoute: (routeSettings) {
             Widget screen = Container(color: Colors.pink);

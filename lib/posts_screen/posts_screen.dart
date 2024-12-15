@@ -38,6 +38,10 @@ class _PostsScreenState extends State<PostsScreen> {
           };
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _onCreatePostTap(context),
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
@@ -86,5 +90,9 @@ class _PostsScreenState extends State<PostsScreen> {
 
   void _onPostTap(BuildContext context, Post post) {
     PostDetailScreen.navigateTo(context, post);
+  }
+
+  void _onCreatePostTap(BuildContext context) {
+    Navigator.pushNamed(context, 'createPost');
   }
 }

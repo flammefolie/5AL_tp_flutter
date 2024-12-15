@@ -10,3 +10,9 @@ class CreatePost extends PostsEvent {
 
   CreatePost({required this.post});
 }
+
+class UpdatePost extends PostsEvent {
+  final Post post;
+
+  UpdatePost({required this.post});
+}

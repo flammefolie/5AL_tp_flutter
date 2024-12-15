@@ -23,4 +23,13 @@ class PostsRepository {
     await localDataSource.save(updatedPosts);
     return post;
   }
+
+  Future<void> updatePost(Post updatedPost) async {
+    final existingPosts = await localDataSource.getAllPosts();
+    final updatedPosts = existingPosts.map((post) {
+      return post.id == updatedPost.id ? updatedPost : post;
+    }).toList();
+
+    await localDataSource.save(updatedPosts);
+  }
 }

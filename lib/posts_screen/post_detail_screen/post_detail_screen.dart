@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../shared/models/post.dart';
+import '../edit_post_screen/edit_post_screen.dart';
 
 class PostDetailScreen extends StatelessWidget {
   static Future<void> navigateTo(BuildContext context, Post post) {
@@ -19,6 +20,12 @@ class PostDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(post.title),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () => _editPost(context),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -31,6 +38,15 @@ class PostDetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _editPost(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditPostScreen(post: post),
       ),
     );
   }
